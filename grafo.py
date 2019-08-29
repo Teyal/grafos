@@ -1,8 +1,10 @@
 from typing import Iterable
 
+'''
 def __input_lines__(n: int, ent: ) -> Iterable[str]:
     for _ in range(n):
         yield input()
+'''
 
 class Grafo:
 #    def __init__(self, v, e, w):
@@ -26,11 +28,18 @@ class Grafo:
         #entrada = input().split() #primeira entrada com vertices n
         #ent = r.readline().split() #ent é entrada
         n = int(ent[0].split()[1])
-        print(n)
-        print(type(n))
-        vertices_data = [l.split() for l in ent[n]]
+        #vertices_data = [l.split() for l in ent[n]]
+        #print(vertices_data)
+
         #vertices_data = (l.split() for l in __input_lines__(n, ent))  # pega os vértices com seus labels
-        nomes_dict = {x: y for x, y in vertices_data}        # cria um dict com {vertice : label}
+        #nomes_dict = {x: y for x, y in vertices_data}        # cria um dict com {vertice : label}
+        #nomes_dict = {x: y for x, y in ent[n].split() for n in range(1,n)}
+        #nomes_dict = {x: y for x, y in e.split() for e in ent for }
+        print(ent[1:n+1])
+        nomes_dict = {x:y for e in ent[1:n+1] for x, y in e.split()}
+        nomes_dict = {x:y for x,y in ent[1:n+1].split()}
+
+        #eu não sei como fazer esse comprehension de cima /\
 
         ''' parte inutil sem usar realline ou input
         #_ = input()  #para pular o "*edges" no arquivo
