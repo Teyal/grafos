@@ -1,5 +1,7 @@
 from typing import Iterable
 
+
+vertices =[]
 '''
 def __input_lines__(n: int, ent: ) -> Iterable[str]:
     for _ in range(n):
@@ -36,8 +38,10 @@ class Grafo:
         #nomes_dict = {x: y for x, y in ent[n].split() for n in range(1,n)}
         #nomes_dict = {x: y for x, y in e.split() for e in ent for }
         print(ent[1:n+1])
-        nomes_dict = {x:y for e in ent[1:n+1] for x, y in e.split()}
-        nomes_dict = {x:y for x,y in ent[1:n+1].split()}
+        #nomes_dict = {x:y for e in ent[1:n+1] for x, y in e.split()}
+        #nomes_dict = {x:y for x,y in ent[1:n+1].split()}
+        nomes_dict = {x: y for x, y in map(lambda e: e.split(), ent[1:n+1])}
+        print(nomes_dict)
 
         #eu não sei como fazer esse comprehension de cima /\
 
