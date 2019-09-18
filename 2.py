@@ -9,24 +9,54 @@ g.ler(arquivo)
 '''
 
 s = 2 # trocar por: s = g.vertice[n]
-q = deque()
-q.append(s) # Q←Fila()
 vertices = [0,1,2,4]
 
 visitado = {x:False for x in vertices} # Cv←false ∀v ∈ V
-niveis = [[s]]
+d = {x:float('inf') for x in vertices} # Dv ←∞ ∀v ∈ V
 
+# niveis = [[s]]
 
 '''o resultado deve ser: [ [s]  [N(s)] [N(N(s))]]'''
-visitado[n] = True # Cs←true
+
+# Configurando o vértice de origem
+
+visitado[s] = True # Cs←true
+d[s] = 0 # Dv <- 0
+
+# preparando fila de visitas
+
+q = deque()
+q.append(s) # Q←Fila()
 
 while len(q) > 0: # while Q .empty()=false do
     u = q.popleft()
     for v in g.vizinhos(u):
         if visitado[v] == False:
             visitado[v] = True
-            Dv = Du + 1
+            d[v] = d[u] + 1
             q.append(v)
+
+
+# Saida
+
+nivel = 0
+controle = True
+
+while (controle):
+	controle = False
+	saida = to_string(nivel + ": ")
+
+	for i in range(vertices.len):
+		if (d[i] == nivel):
+			controle = True
+			# Concatenar nivel com vertices do nivel, EX: 0: 1, 2, 3 
+			saida += to_string(i) + ","
+
+
+	if (controle):
+		saidaFinal = saida + "\n"
+		nivel++
+
 
 '''
 while
