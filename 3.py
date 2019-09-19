@@ -1,6 +1,6 @@
 #vertices = [[7 for x in range(2)] for y in range(10)]
 vertices = [1, 2, 3, 4, 5, 6]
-arestas = [[1, 3],[1, 2],[2, 3],[4, 5],[4, 6],[5, 6]]
+arestas = [[1, 2],[1, 3],[1, 4],[1, 5],[2, 3],[2, 4], [2, 5],[4, 5],[4, 6],[5, 6]]
 pesos = [3, 6, 12, 1, 2, 9]
 contadorDoNumero = 0
 C = [0, 0, 0, 0, 0, 0]
@@ -39,13 +39,12 @@ def buscarSubCicloEuleriano(vertice1, vertices, arestas):
           arestasRestantes.pop(arestasRestantes.index(i))
           print('ciclo', ciclo)
           break
-          posicaoDoI = arestasRestantes.index(i)
     print(arestasRestantes)
     if ciclo[len(ciclo)-1] == ciclo[0]:
       vertice1 = ciclo[(ciclo.index(vertice1) + 1)%len(ciclo)]
-      print(vertice1)
-    if controlador > 120:
-      break
+      if vertice1 == ciclo[0]:
+        print("nao ha ciclo")
+        return
   print(ciclo)
   return
 
