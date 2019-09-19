@@ -1,7 +1,7 @@
 #vertices = [[7 for x in range(2)] for y in range(10)]
-vertices = [1, 2, 3, 4, 5, 6]
-arestas = [[1, 2],[1, 3],[1, 4],[1, 5],[2, 3],[2, 4], [2, 5],[4, 5],[4, 6],[5, 6]]
-pesos = [3, 6, 12, 1, 2, 9]
+vertices = [1, 2, 3, 4, 5]
+arestas = [[1, 5],[1, 3],[3, 2], [3, 4],[4, 2],[5, 3]]
+pesos = []
 contadorDoNumero = 0
 C = [0, 0, 0, 0, 0, 0]
 
@@ -26,23 +26,24 @@ def buscarSubCicloEuleriano(vertice1, vertices, arestas):
   ciclo.append(vertice1)
   arestasRestantes = arestas
   posicaoDoI = 0
-  controlador = 0
   print(arestasRestantes)
   while len(arestasRestantes) != 0:
     for i in arestasRestantes:
       #print(i)
       for j in range(2) :
-        controlador += 1
         if i[j] == vertice1:
-          ciclo.append(i[(j+1)%2])
-          vertice1 = i[(j+1)%2]
+          tamanho_ciclo = len(ciclo)
+          for indexDoVertice in range(tamanho_ciclo -1, 0, -1):
+            if ciclo[indexDoVertice] == vertice1:
+              ciclo.insert(i[(j+1)%2], indexDoVertice+1)
           arestasRestantes.pop(arestasRestantes.index(i))
           print('ciclo', ciclo)
           break
     print(arestasRestantes)
     if ciclo[len(ciclo)-1] == ciclo[0]:
       vertice1 = ciclo[(ciclo.index(vertice1) + 1)%len(ciclo)]
-      if vertice1 == ciclo[0]:
+      if vertice1 == ciclo[0] and len(arestasRestantes) != 0:
+        print(ciclo)
         print("nao ha ciclo")
         return
   print(ciclo)
