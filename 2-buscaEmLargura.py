@@ -47,7 +47,8 @@ while (controle):
 			# Concatenar nivel com vertices do nivel, EX: 0: 1, 2, 3 
 			saida += str(i) + (",")
 
-	print(saida)
 	if (controle):
 		saidaFinal = str(saida) + "\n"
 		nivel += 1
+
+	print(saida)
