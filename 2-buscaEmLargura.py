@@ -51,4 +51,4 @@ while (controle):
 		saidaFinal = str(saida) + "\n"
 		nivel += 1
 
-	print(saida)
+	print(saidaFinal)
