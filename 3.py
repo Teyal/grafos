@@ -33,21 +33,28 @@ def buscarSubCicloEuleriano(vertice1, vertices, arestas):
       for j in range(2) :
         if i[j] == vertice1:
           tamanho_ciclo = len(ciclo)
-          for indexDoVertice in range(tamanho_ciclo -1, 0, -1):
-            if ciclo[indexDoVertice] == vertice1:
-              ciclo.insert(i[(j+1)%2], indexDoVertice+1)
+          if len(ciclo) > 2:
+            for indexDoVertice in range(tamanho_ciclo -1, 0, -1):
+              if ciclo[indexDoVertice] == vertice1:
+                print("[e")
+                ciclo.insert(indexDoVertice+1, i[(j+1)%2])
+          else:
+            ciclo.append(i[(j+1)%2])
+          vertice1 = i[(j+1)%2]
           arestasRestantes.pop(arestasRestantes.index(i))
           print('ciclo', ciclo)
           break
     print(arestasRestantes)
+    print(vertice1)
     if ciclo[len(ciclo)-1] == ciclo[0]:
       vertice1 = ciclo[(ciclo.index(vertice1) + 1)%len(ciclo)]
-      if vertice1 == ciclo[0] and len(arestasRestantes) != 0:
+      #ciclo2 = buscarSubCicloEuleriano(vertice1, vertices, arestasRestantes)
+      #print(ciclo2)
+      if vertice1 == ciclo[0] and len(arestasRestantes) == 110:
         print(ciclo)
         print("nao ha ciclo")
         return
-  print(ciclo)
-  return
+  return ciclo
 
 
 
