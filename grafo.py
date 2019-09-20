@@ -1,6 +1,6 @@
 class Grafo:
     arestas = {}
-    vertices = {}
+    vertices = []
     pesos = {}
     rotulos = {}
 
@@ -10,17 +10,13 @@ class Grafo:
         ent = r.read().splitlines()
         n = int(ent[0].split()[1])
 
-        print(ent[1:n+1])
-
         nomes_dict = {int(x): y for x, y in map(lambda e: e.split(), ent[1:n+1])}
-        print("nomes = {}".format(nomes_dict))
-
+        self.vertices = list(nomes_dict.keys())
         n += 2
         peso_dict = {} #criação de dicionarios para guardar os pesos
         arestas = {}   #e as arestas
         for x in range(n,len(ent)):
             entrada = ent[x].split()
-            print(entrada)
             u = int(entrada[0])
             v = int(entrada[1])
             weight = int(int(entrada[2]))
