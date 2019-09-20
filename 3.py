@@ -1,6 +1,6 @@
 #vertices = [[7 for x in range(2)] for y in range(10)]
-vertices = [1, 2, 3, 4, 5]
-arestas = [[1, 5],[1, 3],[3, 2], [3, 4],[4, 2],[5, 3]]
+vertices = [1, 2, 3, 4, 5, 6]
+arestas = [[1, 5],[1, 3],[3, 2], [3, 4],[4, 2],[4, 5],[4, 6],[5, 3],[5, 6]]
 pesos = []
 contadorDoNumero = 0
 C = [0, 0, 0, 0, 0, 0]
@@ -31,13 +31,13 @@ def buscarSubCicloEuleriano(vertice1, vertices, arestas):
       #print(i)
       for j in range(2) :
         if i[j] == vertice1:
-          print(arestasRestantes)
-          print(vertice1)
+          #print(arestasRestantes)
+          #print(vertice1)
           tamanho_ciclo = len(ciclo)
           if len(ciclo) > 2:
             for indexDoVertice in range(tamanho_ciclo -1, 0, -1):
               if ciclo[indexDoVertice] == vertice1:
-                print("vo iseri",i[(j+1)%2])
+                #print("vo iseri",i[(j+1)%2])
                 ciclo.insert(indexDoVertice+1, i[(j+1)%2])
                 vertice1 = i[(j+1)%2]
                 checador = 1
@@ -46,7 +46,7 @@ def buscarSubCicloEuleriano(vertice1, vertices, arestas):
             ciclo.append(i[(j+1)%2])
             vertice1 = i[(j+1)%2]
           arestasRestantes.pop(arestasRestantes.index(i))
-          print('ciclo', ciclo)
+          #print('ciclo', ciclo)
           break
     if checador == 0 and len(ciclo) > 2:
       vertice1 = ciclo[(ciclo.index(vertice1) + 1)%len(ciclo)]
@@ -55,13 +55,14 @@ def buscarSubCicloEuleriano(vertice1, vertices, arestas):
       if vertice1 == ciclo[0] and len(arestasRestantes) == 110:
         print("nao ha ciclo")
         return
+  ciclo.append(ciclo[0])
   return ciclo
 
 
 
 def hierholzer(vertices, arestas):
   vertice1 = vertices[0]
-  buscarSubCicloEuleriano(vertice1, vertices, arestas)
+  print(buscarSubCicloEuleriano(vertice1, vertices, arestas))
   return
 
 if haCicloEuleriano(arestas) == 1:
