@@ -3,8 +3,8 @@ class Grafo:
     vertices = []
     pesos = {}
     rotulos = {}
-
-    def __init__(self):
+                        #coloquei esses argumentos mas ainda nao implementei eles
+    def __init__(self, direcionada = False, ponderada = False):
         arquivo = input()
         r = open(arquivo, "r")
         ent = r.read().splitlines()
