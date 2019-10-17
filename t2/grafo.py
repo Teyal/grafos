@@ -3,7 +3,7 @@ class Grafo:
     vertices = []
     pesos = {}
     rotulos = {}
-                        #coloquei esses argumentos mas ainda nao implementei eles
+
     def __init__(self, direcionada = False, ponderada = False):
         arquivo = input()
         r = open(arquivo, "r")
@@ -19,23 +19,30 @@ class Grafo:
             entrada = ent[x].split()
             u = int(entrada[0])
             v = int(entrada[1])
-            weight = int(int(entrada[2]))
+            
 
             if u in arestas: # inserção {a:b}
                 arestas[u]=arestas[u]+[v] # caso já exista chave
             else:
                 arestas[u]=[v] #caso não há a chave ainda
-            if u < v:
-                peso_dict[(u,v)] = weight
-            else:
-                peso_dict[(v,u)] = weight
 
-            if v in arestas: # inserção {b:a}
-                arestas[v]=arestas[v]+[u] # caso já exista a chave
-            else:
-                arestas[v]=[u] #caso não há a chave ainda
+            if not direcionada:
+	            if v in arestas: # inserção {b:a}
+	                arestas[v]=arestas[v]+[u] # caso já exista a chave
+	            else:
+	                arestas[v]=[u] #caso não há a chave ainda
+            
+            if ponderada:
+            	weight = int(int(entrada[2]))
 
-        self.pesos = peso_dict
+	            if u < v:
+	                peso_dict[(u,v)] = weight
+	            else:
+	                peso_dict[(v,u)] = weight
+
+
+        if ponderada:
+        	self.pesos = peso_dict
         self.rotulos = nomes_dict
         self.arestas = arestas
 
@@ -49,9 +56,10 @@ class Grafo:
         return len(self.arestas[v])
 
     def peso(self, u, v):
-        if u < v:
-            return self.pesos[(u,v)]
-        return self.pesos[(v,u)]
+        if ponderada:
+        	if u < v:
+            	return self.pesos[(u,v)]
+        	return self.pesos[(v,u)]
 
     def rotulo(self, v):
         return self.rotulos[v]
