@@ -1,3 +1,5 @@
+from collections import defaultdict
+
 class Grafo:
     arestas = {}
     vertices = []
@@ -27,22 +29,20 @@ class Grafo:
                 arestas[u]=[v] #caso não há a chave ainda
 
             if not direcionada:
-	            if v in arestas: # inserção {b:a}
-	                arestas[v]=arestas[v]+[u] # caso já exista a chave
-	            else:
-	                arestas[v]=[u] #caso não há a chave ainda
+                if v in arestas: # inserção {b:a}
+                    arestas[v]=arestas[v]+[u] # caso já exista a chave
+                else:
+                    arestas[v]=[u] #caso não há a chave ainda
             
             if ponderada:
-            	weight = int(int(entrada[2]))
-
-	            if u < v:
-	                peso_dict[(u,v)] = weight
-	            else:
-	                peso_dict[(v,u)] = weight
-
+                weight = int(int(entrada[2]))
+                if u < v:
+                    peso_dict[(u,v)] = weight
+                else:
+                    peso_dict[(v,u)] = weight
 
         if ponderada:
-        	self.pesos = peso_dict
+            self.pesos = peso_dict
         self.rotulos = nomes_dict
         self.arestas = arestas
 
@@ -57,9 +57,9 @@ class Grafo:
 
     def peso(self, u, v):
         if ponderada:
-        	if u < v:
-            	return self.pesos[(u,v)]
-        	return self.pesos[(v,u)]
+            if u < v:
+                return self.pesos[(u,v)]
+            return self.pesos[(v,u)]
 
     def rotulo(self, v):
         return self.rotulos[v]
@@ -69,3 +69,12 @@ class Grafo:
     
     def haAresta(self, u, v):
         return v in self.arestas[u]
+
+    def transposta(self):
+        #def invert_graph(edges: Dict[Node, List[Node]]):
+        invertido = defaultdict(lambda: [])
+        for u, destinos in self.arestas.items():
+            for v in destinos:
+                if u not in invertido[v]:
+                    invertido[v].append(u)
+        return dict(invertido)
