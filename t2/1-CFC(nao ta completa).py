@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from grafo import Grafo
+import copy
 
 g = Grafo(True, False)
 
@@ -20,11 +21,9 @@ def DFS_Visit(g, v, visitado, tempoVisita, antecessor, tempoFinal, tempo):
     tempoVisita[v] = tempo
     if v in g.arestas.keys():
         for u in g.vizinhos(v): 
-            if u in g.arestas.keys():
-                print(visitado)
-                if visitado[u] == False:
-                    antecessor[u] = v
-                    DFS_Visit(g, u, visitado, tempoVisita, antecessor, tempoFinal, tempo)
+            if visitado[u] == False:
+                antecessor[u] = v
+                DFS_Visit(g, u, visitado, tempoVisita, antecessor, tempoFinal, tempo)
     
     
     tempo = tempo + 1
@@ -36,11 +35,10 @@ def DFS(g, visitado, tempoVisita, antecessor, tempoFinal):
     tempo = 0
     
     for u in g.vertices:
-        if u in g.arestas.keys():
-            if visitado[u] == False:
-                DFS_Visit(g, u, visitado, tempoVisita, antecessor, tempoFinal, tempo)
+        if visitado[u] == False:
+            DFS_Visit(g, u, visitado, tempoVisita, antecessor, tempoFinal, tempo)
                 
-    return(visitado, tempoVisita, antecessor, tempoFinal)
+#    return(visitado, tempoVisita, antecessor, tempoFinal)
 #
 
 # algoritmo auxiliar DFS-Alterado
@@ -69,20 +67,19 @@ def DFS_Alterado(gTransposto, visitado, tempoVisita, antecessor, tempoFinal):
 # Vetor A'/Antecessor 
 # Vetor F/ tempo que é finalizado
     
-vertices = g.vertices
-visitado = {}
-tempoVisita = {}
-antecessor = {}
-tempoFinal = {}
 visitado = {x:False for x in g.vertices} # Cv←false ∀v ∈ V
 tempoVisita = {x:float('inf') for x in g.vertices} # Tv ←∞ ∀v ∈ V
 tempoFinal = {x:float('inf') for x in g.vertices} # Fv ←∞ ∀v ∈ V
 antecessor = {x:None for x in g.vertices} # Av ←∞ ∀v ∈ V
 DFS(g, visitado, tempoVisita, antecessor, tempoFinal)
-auxiliar = g
+print(visitado)
+auxiliar = copy.deepcopy(g)
 auxiliar.arestas = g.transposta()
+#print(id(g))
+#print(id(auxiliar))
+print(g.arestas)
+print(auxiliar.arestas)
 DFS_Alterado(auxiliar, visitado, tempoVisita, antecessor, tempoFinal)
-
 
 # Saida
 #saidaSafe = [[]]
