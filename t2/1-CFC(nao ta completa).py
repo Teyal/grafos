@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from grafo import Grafo
 
 g = Grafo(True, False)
@@ -13,13 +14,14 @@ def vizinhos(d, v):
         return d[v]
 
 def DFS_Visit(g, v, visitado, tempoVisita, antecessor, tempoFinal, tempo):
-    print("ai")
+
     visitado[v] = True
     tempo = tempo + 1
     tempoVisita[v] = tempo
     if v in g.arestas.keys():
         for u in g.vizinhos(v): 
             if u in g.arestas.keys():
+                print(visitado)
                 if visitado[u] == False:
                     antecessor[u] = v
                     DFS_Visit(g, u, visitado, tempoVisita, antecessor, tempoFinal, tempo)
@@ -51,7 +53,6 @@ def DFS_Alterado(gTransposto, visitado, tempoVisita, antecessor, tempoFinal):
         teste = False
         maior = -1
         maior_indice = -1
-        print(g.vertices)
         for i in g.vertices:
             if tempoFinal[i] > maior and visitado[i] == False:
                 teste = True
@@ -82,13 +83,6 @@ auxiliar = g
 auxiliar.arestas = g.transposta()
 DFS_Alterado(auxiliar, visitado, tempoVisita, antecessor, tempoFinal)
 
+
 # Saida
-
-for i in g.vertices:
-    
-    if (antecessor[i] == None):
-        saida = str(i) + (", ")
-    else:
-        saida = str(i) + (": ")
-
-print(saida)
+#saidaSafe = [[]]
