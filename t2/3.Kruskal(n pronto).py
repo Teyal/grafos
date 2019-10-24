@@ -34,11 +34,11 @@ def Kruskal(g):
     i = 0 #index pra percorrer cada possivel aresta na entrada
     e = 0 #numero de arestas em resultado[] (arestas da saida)
     
-    for node in range(g.vertices): 
+    for node in range(len(g.vertices)): 
         pai.append(node) 
         rank.append(0) 
   
-    while e < g.vertices -1 : #enquanto a arvore nao estiver completa...
+    while e < len(g.vertices) -1 : #enquanto a arvore nao estiver completa...
 
         ancestralDeU = self.find(pai, arestas_ordenada[i][0]) #u
         ancestralDeV = self.find(pai ,arestas_ordenada[i][1]) #v
