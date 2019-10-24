@@ -1,43 +1,60 @@
-#vou acabar hj
-
 from collections import deque
-from grafo import Grafo
+from grafos.grafo import Grafo
 
-def Kruskal(self): 
+#class Grafo:
+#    arestas = {}
+#    vertices = []
+#    pesos = {}
+#    rotulos = {}
 
-    resultado = [] 
+def find(self, parent, i): 
+        if parent[i] == i: 
+            return i    #so retorna se o metodo achar o pai da FLORESTA LOCAL
+        return self.find(parent, parent[i]) 
+
+def union(self, parent, rank, ancestralDeU, ancestralDeV):
+
+    # quem tiver o menor rank, recebe o de maior rank como pai  
+    if rank[ancestralDeU] < rank[ancestralDeV]: 
+        parent[ancestralDeU] = ancestralDeV 
+    elif rank[ancestralDeU] > rank[ancestralDeV]: 
+        parent[ancestralDeV] = ancestralDeU 
+
+    #se os ranks forem iguais, o ancestral final de v vira o ancestral final de u
+    else : 
+        parent[ancestralDeV] = ancestralDeU 
+        rank[ancestralDeU] += 1
+def Kruskal(g): 
     
-    g = Grafo(false, true)
+    resultado = []
+    set_arestas = {tuple(sorted([u, v])) for u, vs in g.arestas.items() for v in vs}
+    arestas_ordenada = sorted(set_arestas, key=lambda e: self.pesos[e])
 
-    i = 0 
-    e = 0 
-
-    g =  sorted(g,key=lambda item: item[2]) 
-
-    pai = [] ; rank = [] 
-
-    for node in range(self.V): 
+    pai = [] ; rank = []
+    i = 0 #index pra percorrer cada possivel aresta na entrada
+    e = 0 #numero de arestas em resultado[] (arestas da saida)
+    
+    for node in range(g.vertices): 
         pai.append(node) 
         rank.append(0) 
   
-    while e < self.V -1 : 
+    while e < g.vertices -1 : #enquanto a arvore nao estiver completa...
 
-        u,v,p =  g[i] 
-        i = i + 1
-        x = self.find(pai, u) 
-        y = self.find(pai ,v) 
+        ancestralDeU = self.find(pai, arestas_ordenada[i][0]) #u
+        ancestralDeV = self.find(pai ,arestas_ordenada[i][1]) #v
 
-        if x != y: 
+        if ancestralDeU != ancestralDeV: 
             e = e + 1     
-            resultado.append([u,v,p]) 
-            self.union(pai, rank, x, y)             
+            resultado.append(([arestas_ordenada[i][0],arestas_ordenada[i][1]])) 
+            self.union(pai, rank, ancestralDeU, ancestralDeV)             
+        i = i + 1 # arestas_ordenadas[(i=0),(i=1), ... ,(i=vertices -1 )]
 
     print ("Peso da arvore:")
     pesoTotal = 0
-    for u,v,peso  in resultado:
-        pesoTotal = pesoTotal + peso
+    for aresta in resultado:
+        pesoTotal = pesoTotal + g.pesos["aresta"]
     print ("%d" % (peso))
     
     print ("Arestas na arvore:")
-    for u,v,peso  in resultado: 
-        print ("%d -- %d" % (u,v)) 
+    for aresta  in resultado: 
+        print ("%d -- %d" % (aresta[0],aresta[1])) 
