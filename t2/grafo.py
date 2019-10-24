@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from collections import defaultdict
 
 class Grafo:
@@ -7,8 +8,8 @@ class Grafo:
     rotulos = {}
 
     def __init__(self, direcionada = False, ponderada = False):
-        arquivo = input()
-        r = open(arquivo, "r")
+        #arquivo = input()
+        r = open("input.txt", "r")
         ent = r.read().splitlines()
         n = int(ent[0].split()[1])
 
