@@ -6,9 +6,10 @@ def DFS_Visit_OT(g, v, visitado, tempoVisita, tempoFinal, tempo, O):
     tempo = tempo + 1
     tempoVisita[v] = tempo
     
-    for u in g.vizinhos(v):
-        if visitado[u] == False:
-            DFS_Visit_OT(g, u, visitado, tempoVisita, tempoFinal, tempo, O)
+    if v in g.arestas.keys():
+        for u in g.vizinhos(v):
+            if visitado[u] == False:
+                DFS_Visit_OT(g, u, visitado, tempoVisita, tempoFinal, tempo, O)
     
     tempo = tempo + 1
     tempoFinal = tempo
@@ -41,3 +42,5 @@ O = []
 for u in g.vertices:
     if visitado[u] == False:
         DFS_Visit_OT(g, u, visitado, tempoVisita, tempoFinal, tempo, O)
+
+print(O)
