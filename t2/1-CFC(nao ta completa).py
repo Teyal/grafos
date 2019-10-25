@@ -18,6 +18,8 @@ def vizinhos(d, v):
 
 def DFS_Visit(g, v, visitado, tempoVisita, antecessor, tempoFinal, tempo):
 
+    #deveria ter uma maneira d fazer uma lista e retornar ela p poder ordenar mais rapido e poder imprimir o resultado final
+
     visitado[v] = True
     tempo = tempo + 1
     tempoVisita[v] = tempo
@@ -73,6 +75,7 @@ print(tempoFinal)
 vertices_ordenados = sorted(g.vertices, key=lambda e: tempoFinal[e], reverse=True)
 print(vertices_ordenados)
 DFS_Alterado(auxiliar, vertices_ordenados, *reset())
+
 
 # Saida
 #saidaSafe = [[]]
