@@ -1,0 +1,39 @@
+from grafo import Grafo
+import copy
+
+g = Grafo(True, False)
+
+vertices = g.vertices
+
+#configurando todos os vertices
+visitado = {x:False for x in vertices} # Cv←false ∀v ∈ V
+antecessor = {x:None for x in vertices} # Av ←∞ ∀v ∈ V
+#tempoVisita = {x:float('inf') for x in g.vertices} # Tv ←∞ ∀v ∈ V
+#tempoFinal = {x:float('inf') for x in g.vertices} # Fv ←∞ ∀v ∈ V
+
+#configurando vertice de origem
+visitado[s] = True
+
+#preparando a fila de visitas
+q = deque()
+#iniciar a busca pela fonte
+q.append(s)
+#propagacao das visitas
+
+while len(q) > 0:
+    u = q.popleft()
+    for v in g.vizinhos(u):
+        if (visitado[v] == False) and c((u,v))−f((u,v)) > 0:
+            visitado[v] = True
+            antecessor[v] = u
+            #sorvedouro encontrado. Criar caminho aumentante
+            if v = t:
+                p = t
+                w = t
+                while w != s:
+                    w = antecessor[w]
+                    p = w union p
+                    return p
+            q.append(v)
+
+return None
